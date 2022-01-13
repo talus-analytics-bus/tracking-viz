@@ -1,17 +1,61 @@
 // const d3 = require("d3");
 // import d3 from "d3";
 import * as d3 from "d3/dist/d3.min";
-import data from "./jeespend.json";
+import dataTmp from "./jeespend.json";
 import uid from "../../lib/dom/uid";
+const ces = [...new Set(dataTmp.map((d) => d.ce))];
 
-const width = 600;
+const hideChildren = ["Unspecified", "General IHR"];
+
+const SHOW_UNSPECIFIED = false;
+
+const data = {
+  name: "Disbursed funding (USD, nominal) by Joint External Evaluation (JEE) core capacity",
+  children: ces
+    .map((ce) => {
+      // const special = ["Unspecified", "General IHR"].includes(ce);
+      const node = {
+        name: ce,
+        children: dataTmp
+          .filter((dd) => dd.ce === ce)
+          .map((dd) => {
+            return { name: dd.cc, value: dd.value };
+          }),
+      };
+      // if (special) node.value = dataTmp.find((d) => d.ce === ce).value;
+      return node;
+    })
+    .filter((d) => SHOW_UNSPECIFIED || d.name !== "Unspecified"),
+};
+
+console.log(data);
+
+const width = 1000;
 const height = 600;
 const format = (v) => {
   return d3.format("$,.2s")(v).replace(/G/, "bn").replace(/M/, "m");
 };
-const color = d3.scaleSequential([8, 0], d3.interpolateMagma);
 
-const ces = [...new Set(data.map((d) => d.ce))];
+const test = d3.color("#2263B5");
+test.opacity = 0.5;
+
+const jeeColors = {
+  Main: "#ffffff",
+  Prevent: ["#2263B5", "#cde6f6"],
+  Detect: ["#41BBE3", "#dbf2fa"],
+  Respond: ["#2A8F82", "#d8f4f0"],
+  Other: ["#71AE2C", "#e4f4d2"],
+  General: ["#2263B5", "#ffffff"],
+  Unspecified: ["#AEAFB3", "#ffffff"],
+  "General IHR": ["#b52263", "#f6cddf"],
+};
+
+const color = (d) => {
+  if (d.depth === 0) return jeeColors.Main;
+  if (d.depth === 1) return jeeColors[d.data.name][d.depth - 1];
+  if (d.depth === 2 && d.parent)
+    return jeeColors[d.parent.data.name][d.depth - 1];
+};
 
 const treemap = (data) =>
   d3
@@ -22,19 +66,7 @@ const treemap = (data) =>
     .paddingInner(1)
     .round(true)(
     d3
-      .hierarchy({
-        name: "Disbursed funding (USD, nominal) by Joint External Evaluation (JEE) core capacity",
-        children: ces.map((ce) => {
-          return {
-            name: ce,
-            children: data
-              .filter((dd) => dd.ce === ce)
-              .map((dd) => {
-                return { name: dd.cc, value: dd.value };
-              }),
-          };
-        }),
-      })
+      .hierarchy(data)
       .sum((d) => d.value)
       .sort((a, b) => b.value - a.value)
   );
@@ -66,7 +98,11 @@ const chart = () => {
     .selectAll("g")
     .data((d) => d[1])
     .join("g")
-    .attr("transform", (d) => `translate(${d.x0},${d.y0})`);
+    .attr("transform", (d) => `translate(${d.x0},${d.y0})`)
+    .attr("opacity", (d) => {
+      if (d.parent && hideChildren.includes(d.parent.data.name)) return 0;
+      else return 1;
+    });
 
   node.append("title").text(
     (d) =>
@@ -80,7 +116,9 @@ const chart = () => {
   node
     .append("rect")
     .attr("id", (d) => (d.nodeUid = uid("node")).id)
-    .attr("fill", (d) => color(d.height))
+    .attr("fill", (d) => {
+      return color(d);
+    })
     .attr("width", (d) => d.x1 - d.x0)
     .attr("height", (d) => d.y1 - d.y0);
 
@@ -92,6 +130,10 @@ const chart = () => {
 
   node
     .append("text")
+    .attr("fill", (d) => (d.depth === 1 ? "white" : undefined))
+    .style("font-weight", (d) => (d.depth === 1 ? "bold" : undefined))
+    .style("font-size", (d) => (d.depth === 0 ? "1.5em" : undefined))
+    .style("font-size", (d) => (d.depth === 1 ? "1.5em" : undefined))
     .attr("clip-path", (d) => d.clipUid)
     .selectAll("tspan")
     .data((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
@@ -101,10 +143,13 @@ const chart = () => {
     )
     .text((d) => d);
 
+  const getDx = (_d, i) => {
+    return i === 0 || _d.startsWith("$") ? 3 : null;
+  };
   node
     .filter((d) => d.children)
     .selectAll("tspan")
-    .attr("dx", (_d, i) => (i === 0 ? 3 : null))
+    .attr("dx", getDx)
     .attr("y", 13);
 
   node
@@ -116,8 +161,6 @@ const chart = () => {
       (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`
     );
 
-  console.log(svg);
-  console.log(svg.node());
   return svg.node();
 };
 
