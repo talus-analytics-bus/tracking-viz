@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import chart from "./components/TestTreemap/chart";
+import chart from "./components/JEETreemap/chart";
 
 function App() {
   useEffect(() => {

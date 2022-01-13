@@ -1,0 +1,46 @@
+[
+  { "ce": "Detect", "cc": "Workforce Development", "value": 26036351636 },
+  { "ce": "Detect", "cc": "Reporting", "value": 25482511280 },
+  { "ce": "Detect", "cc": "Real Time Surveillance", "value": 20370709996 },
+  { "ce": "Detect", "cc": "National Laboratory System", "value": 17586312779 },
+  {
+    "ce": "General IHR",
+    "cc": "General IHR Implementation",
+    "value": 4122818718
+  },
+  { "ce": "Other", "cc": "Point of Entry (PoE)", "value": 3637838568 },
+  { "ce": "Other", "cc": "Radiation Emergencies", "value": 47519930 },
+  { "ce": "Other", "cc": "Chemical Events", "value": 29156325 },
+  { "ce": "Prevent", "cc": "Immunization", "value": 44323938416 },
+  {
+    "ce": "Prevent",
+    "cc": "National Legislation, Policy, and Financing",
+    "value": 21095220666
+  },
+  { "ce": "Prevent", "cc": "Zoonotic Disease", "value": 7452901349 },
+  {
+    "ce": "Prevent",
+    "cc": "Antimicrobial Resistance (AMR)",
+    "value": 4234599256
+  },
+  { "ce": "Prevent", "cc": "Food Safety", "value": 3043482825 },
+  { "ce": "Prevent", "cc": "Biosafety and Biosecurity", "value": 597620643 },
+  {
+    "ce": "Prevent",
+    "cc": "IHR Coordination, Communicaton and Advocacy",
+    "value": 13161503
+  },
+  { "ce": "Respond", "cc": "Preparedness", "value": 10418626485 },
+  {
+    "ce": "Respond",
+    "cc": "Medical Countermeasures and Personnel Deployment",
+    "value": 7890931431
+  },
+  { "ce": "Respond", "cc": "Risk Communication", "value": 1624267683 },
+  {
+    "ce": "Respond",
+    "cc": "Linking Public Health and Security Authorities",
+    "value": 274315936
+  },
+  { "ce": "Unspecified", "cc": "Unspecified", "value": 163514594078 }
+]
