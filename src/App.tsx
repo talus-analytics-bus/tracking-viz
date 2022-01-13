@@ -1,10 +1,15 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect } from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import chart from "./components/TestTreemap/chart";
 
 function App() {
+  useEffect(() => {
+    chart();
+  }, []);
   return (
     <div className="App">
+      <svg />
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
