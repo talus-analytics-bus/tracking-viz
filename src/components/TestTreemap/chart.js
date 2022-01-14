@@ -98,8 +98,6 @@ const chart = () => {
       (d, i, nodes) => `${(i === nodes.length - 1) * 0.3 + 1.1 + i * 0.9}em`
     );
 
-  console.log(svg);
-  console.log(svg.node());
   return svg.node();
 };
 

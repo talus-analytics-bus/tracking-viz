@@ -1,10 +1,12 @@
 import "./App.css";
-import { JEETreemap } from "./components/JEETreemap/JEETreemap";
+// import { JEETreemap } from "./components/JEETreemap/JEETreemap";
+import { FundingSankey } from "./components/FundingSankey/FundingSankey";
 
 function App() {
   return (
     <div className="App">
-      <JEETreemap />
+      <FundingSankey />
+      {/* <JEETreemap /> */}
     </div>
   );
 }
