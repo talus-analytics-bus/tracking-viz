@@ -4,15 +4,18 @@ import * as d3Sankey from "d3-sankey";
 // import * as d3Sankey from "d3-sankey";
 const data = require("./tracking_sankey_01142022.json");
 
+const MARGIN = 400;
+
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
 // https://observablehq.com/@d3/sankey-diagram
 function SankeyChart(
   {
-    nodes, // an iterable of node objects (typically [{id}, …]); implied by links if missing
+    nodes: nodesTmp, // an iterable of node objects (typically [{id}, …]); implied by links if missing
     links, // an iterable of link objects (typically [{source, target}, …])
   },
   {
+    showLabels = true,
     format = ",", // a function or format specifier for values in titles
     align = "justify", // convenience shorthand for nodeAlign
     nodeId = (d) => d.id, // given d in nodes, returns a unique identifier (string)
@@ -36,15 +39,19 @@ function SankeyChart(
     linkColor = "source-target", // source, target, source-target, or static color
     linkStrokeOpacity = 0.5, // link stroke opacity
     linkMixBlendMode = "multiply", // link blending mode
-    colors = d3.schemeTableau10, // array of colors
+    colors, // array of colors
     width = 640, // outer width, in pixels
     height = 400, // outer height, in pixels
     marginTop = 5, // top margin, in pixels
-    marginRight = 1, // right margin, in pixels
+    marginRight = showLabels ? MARGIN : 0, // right margin, in pixels
     marginBottom = 5, // bottom margin, in pixels
-    marginLeft = 1, // left margin, in pixels
+    marginLeft = showLabels ? MARGIN : 0, // left margin, in pixels
   } = {}
 ) {
+  width += showLabels ? MARGIN * 2 : 0;
+
+  // let nodes = nodesTmp;
+  let nodes = nodesTmp.sort(getSortByField("cat"), true);
   // Convert nodeAlign from a name to a function (since d3-sankey is not part of core d3).
   if (typeof nodeAlign !== "function")
     nodeAlign =
@@ -82,10 +89,8 @@ function SankeyChart(
 
   // Construct the scales.
   const groupColors = [...new Set(nodeGroups)].map((ng) => {
-    if (ng === "Country") return "red";
-    if (ng === "International") return "blue";
-    if (ng === "Philanthropy") return "green";
-    return "gray";
+    if (colors[ng] !== undefined) return colors[ng];
+    else return "gray";
   });
   const color =
     nodeGroup == null ? null : d3.scaleOrdinal(nodeGroups, groupColors);
@@ -98,6 +103,7 @@ function SankeyChart(
     .nodeAlign(nodeAlign)
     .nodeWidth(nodeWidth)
     .nodePadding(nodePadding)
+    .nodeSort(getSortByField("cat"))
     .extent([
       [marginLeft, marginTop],
       [width - marginRight, height - marginBottom],
@@ -119,6 +125,7 @@ function SankeyChart(
 
   const svg = d3
     .select("svg[data-chart=sankey]")
+    .html("")
     .attr("width", width)
     .attr("height", height)
     .attr("viewBox", [0, 0, width, height])
@@ -190,7 +197,7 @@ function SankeyChart(
         : () => {}
     );
 
-  if (Tl)
+  if (Tl && showLabels)
     svg
       .append("g")
       .attr("font-family", "sans-serif")
@@ -203,8 +210,10 @@ function SankeyChart(
       )
       .attr("y", (d) => (d.y1 + d.y0) / 2)
       .attr("dy", "0.35em")
-      .attr("text-anchor", (d) => (d.x0 < width / 2 ? "start" : "end"));
-  // .text(({ index: i }) => Tl[i]);
+      .attr("text-anchor", (d) => (d.x0 < width / 2 ? "end" : "start"))
+      .text(({ index: i }) =>
+        Tl[i].replace(" (funder)", "").replace(" (recipient)", "")
+      );
 
   function intern(value) {
     return value !== null && typeof value === "object"
@@ -217,7 +226,10 @@ function SankeyChart(
 
 function getNodes(data) {
   const nodes = [];
-  const seen = [];
+  const seen = [
+    "Not reported (recipient)",
+    // "United States of America (funder)",
+  ];
   data.forEach((d) => {
     if (!seen.includes(d.source)) {
       seen.push(d.source);
@@ -231,22 +243,24 @@ function getNodes(data) {
   return nodes;
 }
 const chartData = data;
-const chart = () =>
+const chart = (colors) =>
   SankeyChart(
     {
       nodes: getNodes(chartData),
       links: chartData,
+      // links: chartData.slice(0, 1000),
     },
     {
+      showLabels: false,
       nodeGroup: (d) => d.cat, // take first word for color: ;
-      // nodeGroup: (d) => d.id.split(/\W/)[0], // take first word for color
       nodeAlign: "justify", // e.g., d3.sankeyJustify; set by input above
       linkColor: "source", // e.g., "source" or "target"; set by input above
-      nodePadding: 0,
-      nodeStrokeWidth: 0,
-      // linkStrokeOpacity: 1,
+      nodePadding: 15,
+      nodeLabelPadding: -20,
+      nodeStrokeWidth: 0.5,
+      linkStrokeOpacity: 0.25,
       linkMixBlendMode: "normal",
-      colors: { Country: "red" },
+      colors,
       format: (
         (f) => (d) =>
           `${f(d)} TWh`
@@ -257,3 +271,11 @@ const chart = () =>
   );
 
 export default chart;
+
+const getSortByField = (f, reversed = false) => {
+  return function (a, b) {
+    if (a[f] > b[f]) return reversed ? -1 : 1;
+    else if (a[f] < b[f]) return reversed ? 1 : -1;
+    else return 0;
+  };
+};

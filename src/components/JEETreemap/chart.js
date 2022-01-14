@@ -1,8 +1,8 @@
 // const d3 = require("d3");
 // import d3 from "d3";
-import * as d3 from "d3/dist/d3.min";
 import dataTmp from "./jeespend.json";
 import uid from "../../lib/dom/uid";
+import { format } from "../../Utils";
 const ces = [...new Set(dataTmp.map((d) => d.ce))];
 
 const hideChildren = ["Unspecified", "General IHR"];
@@ -32,9 +32,6 @@ console.log(data);
 
 const width = 1000;
 const height = 600;
-const format = (v) => {
-  return d3.format("$,.2s")(v).replace(/G/, "bn").replace(/M/, "m");
-};
 
 const test = d3.color("#2263B5");
 test.opacity = 0.5;
