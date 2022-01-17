@@ -262,8 +262,8 @@ const chart = (chartData, colors) =>
       nodeGroup: (d) => d.cat, // take first word for color: ;
       nodeAlign: "justify", // e.g., d3.sankeyJustify; set by input above
       linkColor: "source", // e.g., "source" or "target"; set by input above
-      // nodePadding: 0,
-      nodePadding: 15,
+      nodePadding: 0,
+      // nodePadding: 15,
       nodeLabelPadding: -20,
       nodeStrokeWidth: 0.5,
       linkStrokeOpacity: 0.25,

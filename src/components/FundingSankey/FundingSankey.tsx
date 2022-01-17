@@ -2,7 +2,8 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { format } from "../../Utils";
 import chart from "./chart";
-const data = require("./all_indivs_to_int_indivs_tracking_sankey_01172022.json");
+// const data = require("./all_indivs_to_country_indivs_tracking_sankey_01172022.json");
+const data = require("./all_cat_indiv_to_who_region_tracking_sankey_01172022.json");
 
 const reducer = (previousValue: number, currentValue: number) =>
   previousValue + currentValue;
@@ -57,7 +58,7 @@ const LABELS: Record<string, string> = {
   International: "International org.",
 };
 
-const formatPrecise = (v: number) => format(v, 4);
+const formatPrecise = (v: number) => format(v, 3);
 
 export const FundingSankey = () => {
   useEffect(() => {
