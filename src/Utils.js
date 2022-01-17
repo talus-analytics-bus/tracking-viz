@@ -4,5 +4,39 @@ export const format = (v, places = 2) => {
   return d3.format(`$,.${places}s`)(v).replace(/G/, "bn").replace(/M/, "m");
 };
 
-export const orgFlagSrc =
-  "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAACXBIWXMAAAsSAAALEgHS3X78AAADhUlEQVRoge2a72vaQBjH0+JZ8Fp6wu5ojaBCZ+kPphax78rawfYPD/ZmaHErZWP4o7QbRjdbqF1NBkbaE8m96DDXZsG0I9qO03FffHGeOfP93D33PEl05ubmRplmzU61ewkwAZIAoiUBREsCiFagrRvTDdD4/mNhYX4CnIyjWq0+2+/3r66up8+77b7dbgcURen3+5eXbcbYBLjyK8ZYt9uVWWgCJAFESwKIlgQQLQkgWoExzh8EAIXRoJ5brGOaT0JACOYNs2Nao1zUjAYQVSObG2sIIaeHMVbTGppWd591b3eHYOweqBtGs3nWPD3z+l59vqKqEXcnpT2tXq9pjScGSMRj27ms45tSihACAGxurEXV5Xyh+JeZIxgPXgR/+vzF6dxKp5LJFe/BEIYsy+8i+AUgBHP3jLEPB4e6fRsUHLhfTyZXEEKZTMptjs96vlCEMEQw3txYhzCUiMc0rcGjLqpGuHvGWKlcdRYnjFAiHmu1Lnwa87uJE/EYbzjuFUWxGCtVqvxkiXgMwpB3IKW95ulZuVLlb0EQ8EYmneLu84WiO7Q6plmqVP1vA78AUTtMTdPUPbegxyffeGMo7t0aMkQI5rTN5tkj04BfAAAGM3fe+un9yHEAIbx3bBCArfQL3qaUulHPL/yGykMaJ436VBihvd0dt91ypUppzz3aWU9C8N7LnT/99v4RDAAAcAdVfr/oDT8IQ0NIo2o0gHu36b2dfMOUKkcwFOLpK4wWHQAeSHyVOIDZMfP7RZ4MnIThR373gHmX+7wfJeJx9zGOLMZ03Wie3tYvnknvjuzyhlPC+MG6boy6IH4BuAkAgFPLuMIIrdrFiNLe+QPJu1yuMsbcYzumqRvGGPPtld8QqmmNRDyG7CpDMOY8vDbdurzL9F5ZjB2ffM2kUwTjqBrhnOXy0ZvXrxRF2c5lCcGDue/17Gr97J8ADHZhobi3u4MQgjC0ubHm9PNS+tD0D/Fv57L623cWG1wFfjw43M5lAQCPWYeZ9/l9HpQ+H2xF1QjBGIUX+dWobhjnrYuhwLWrMqSUuktsGCEe8bphOLs5CICqRpy6ZifWX4xZ3u8ckvNga2SACZF8MjcxkgCiJQFESwKIlgQQrf/i0aKu65pWnwAzo2l+fn5ubi4wpe4VRbm+Hvy8HYgsL0WWlybAz5iS/1oULQkgWhJAtCSAaEkAoVIU5Tc2gLfK4NogFwAAAABJRU5ErkJggg==";
+export const money = (val, units = true, round = false) => {
+  if (val === "unknown") return "Specific amount not reported";
+  else if (val === 0) return "0" + (units ? " USD" : "");
+  else if (round) {
+    return `${formatSIInteger(val)}${units ? " USD" : ""}`;
+  } else return `${formatSI(val)}${units ? " USD" : ""}`;
+};
+
+const formatSIInteger = (val) => {
+  if (val === 0) return "0";
+  else if (val <= 999) return comma(val);
+  else return d3.format(".2s")(val).replace(/G/, "B");
+};
+
+const comma = function (num) {
+  const resultTmp = d3.format(",.0f")(num);
+  return resultTmp;
+};
+const formatSI = (val) => {
+  // If zero, just return zero
+  if (val === 0) return "0";
+  // If 1 or less, return the value with three significant digits. (?)
+  else if (val < 1) return d3.format(".3f")(val);
+  // If between 1 - 1000, return value with two significant digits.
+  else if (val >= 1 && val < 1000) return d3.formatPrefix(".2f", 1)(val);
+  // k
+  // If 1k or above, return SI value with two significant digits
+  else if (val >= 1000 && val < 1000000)
+    return d3.formatPrefix(".2f", 1000)(val);
+  // k
+  // If 1k or above, return SI value with two significant digits
+  else if (val >= 1000000 && val < 1000000000)
+    return d3.formatPrefix(".2f", 1000000)(val);
+  // M
+  else return d3.formatPrefix(",.2s", 1000000000)(val).replace(/G/, "B"); // B
+};

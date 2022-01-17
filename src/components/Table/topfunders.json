@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1078,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/us.png",
+    "label": "United States of America",
+    "d": 50373525937,
+    "c": 56066031172
+  },
+  {
+    "id": 1075,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/gb.png",
+    "label": "United Kingdom",
+    "d": 10139707785,
+    "c": 8930917053
+  },
+  {
+    "id": 1200,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/eu.png",
+    "label": "European Union",
+    "d": 6051807495,
+    "c": 4990337766
+  },
+  {
+    "id": 869,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/de.png",
+    "label": "Germany",
+    "d": 5567766626,
+    "c": 4100904850
+  },
+  {
+    "id": 908,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ca.png",
+    "label": "Canada",
+    "d": 4247661548,
+    "c": 4280990963
+  },
+  {
+    "id": 868,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/nl.png",
+    "label": "Netherlands",
+    "d": 3980554130,
+    "c": 4445622294
+  },
+  {
+    "id": 883,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/au.png",
+    "label": "Australia",
+    "d": 2077680943,
+    "c": 1537947209
+  },
+  {
+    "id": 1017,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/no.png",
+    "label": "Norway",
+    "d": 1160397698,
+    "c": 1785233424
+  },
+  {
+    "id": 1059,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/se.png",
+    "label": "Sweden",
+    "d": 908653687.3,
+    "c": 897656894.7
+  },
+  {
+    "id": 945,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/fr.png",
+    "label": "France",
+    "d": 594992242.5,
+    "c": 1089631543
+  },
+  {
+    "id": 971,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/it.png",
+    "label": "Italy",
+    "d": 510792848.6,
+    "c": 500902494.2
+  },
+  {
+    "id": 927,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/dk.png",
+    "label": "Denmark",
+    "d": 501179290.5,
+    "c": 447141891
+  },
+  {
+    "id": 944,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/fi.png",
+    "label": "Finland",
+    "d": 452534831.7,
+    "c": 401265186.7
+  },
+  {
+    "id": 973,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/jp.png",
+    "label": "Japan",
+    "d": 439060770.4,
+    "c": 1632063514
+  },
+  {
+    "id": 1060,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ch.png",
+    "label": "Switzerland",
+    "d": 259612279.2,
+    "c": 367217956.8
+  },
+  {
+    "id": 891,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/be.png",
+    "label": "Belgium",
+    "d": 224125312.9,
+    "c": 327919329.2
+  },
+  {
+    "id": 1010,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/nz.png",
+    "label": "New Zealand",
+    "d": 217374833.4,
+    "c": 21524383.85
+  },
+  {
+    "id": 1055,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/es.png",
+    "label": "Spain",
+    "d": 205867511.1,
+    "c": 222065222.1
+  },
+  {
+    "id": 1030,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/kr.png",
+    "label": "Republic of Korea",
+    "d": 139335992.8,
+    "c": 186135612.4
+  },
+  {
+    "id": 969,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ie.png",
+    "label": "Ireland",
+    "d": 96581394.77,
+    "c": 0
+  }
+]
