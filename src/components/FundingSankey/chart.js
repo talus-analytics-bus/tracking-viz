@@ -2,9 +2,10 @@ import * as d3 from "d3/dist/d3.min";
 import * as d3Sankey from "d3-sankey";
 
 // import * as d3Sankey from "d3-sankey";
-const data = require("./tracking_sankey_01142022.json");
+// const data = require("./sankey.json");
 
 const MARGIN = 400;
+const TO_ALL_CAPS = ["euro", "afro", "wpro", "searo", "amro", "emro"];
 
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
@@ -211,9 +212,7 @@ function SankeyChart(
       .attr("y", (d) => (d.y1 + d.y0) / 2)
       .attr("dy", "0.35em")
       .attr("text-anchor", (d) => (d.x0 < width / 2 ? "end" : "start"))
-      .text(({ index: i }) =>
-        Tl[i].replace(" (funder)", "").replace(" (recipient)", "")
-      );
+      .text(getLabelText(Tl));
 
   function intern(value) {
     return value !== null && typeof value === "object"
@@ -222,6 +221,14 @@ function SankeyChart(
   }
   return svg.node();
   // return Object.assign(svg.node(), { scales: { color } });
+}
+
+function getLabelText(Tl) {
+  return ({ index: i }) => formatLabel(i);
+  function formatLabel(i) {
+    const label = Tl[i].replace(" (funder)", "").replace(" (recipient)", "");
+    return TO_ALL_CAPS.includes(label) ? label.toUpperCase() : label;
+  }
 }
 
 function getNodes(data) {
@@ -242,8 +249,8 @@ function getNodes(data) {
   });
   return nodes;
 }
-const chartData = data;
-const chart = (colors) =>
+// const chartData = data;
+const chart = (chartData, colors) =>
   SankeyChart(
     {
       nodes: getNodes(chartData),
@@ -255,6 +262,7 @@ const chart = (colors) =>
       nodeGroup: (d) => d.cat, // take first word for color: ;
       nodeAlign: "justify", // e.g., d3.sankeyJustify; set by input above
       linkColor: "source", // e.g., "source" or "target"; set by input above
+      // nodePadding: 0,
       nodePadding: 15,
       nodeLabelPadding: -20,
       nodeStrokeWidth: 0.5,

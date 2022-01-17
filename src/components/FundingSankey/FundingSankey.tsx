@@ -2,16 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { format } from "../../Utils";
 import chart from "./chart";
-const data = require("./tracking_sankey_01142022.json");
-
-const formatter = new Intl.NumberFormat("en-US", {
-  style: "currency",
-  currency: "USD",
-
-  // These options are needed to round to whole numbers if that's what you want.
-  //minimumFractionDigits: 0, // (this suffices for whole numbers, but will print 2500.10 as $2,500.1)
-  maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
-});
+const data = require("./all_indivs_to_int_indivs_tracking_sankey_01172022.json");
 
 const reducer = (previousValue: number, currentValue: number) =>
   previousValue + currentValue;
@@ -21,6 +12,10 @@ const SankeySvg = styled.svg`
     font-family: "Open Sans", sans-serif;
     font-size: 1.25em;
   }
+`;
+
+const Table = styled.table`
+  text-align: left;
 `;
 
 const Legend = styled.div`
@@ -62,9 +57,11 @@ const LABELS: Record<string, string> = {
   International: "International org.",
 };
 
+const formatPrecise = (v: number) => format(v, 4);
+
 export const FundingSankey = () => {
   useEffect(() => {
-    chart(COLORS);
+    chart(data, COLORS);
   }, []);
   return (
     <>
@@ -83,9 +80,36 @@ export const FundingSankey = () => {
           (nominal USD) for capacity:
           <br />
           {format(data.map((d: any) => d.value).reduce(reducer))}
-          {/* {formatter.format(data.map((d: any) => d.value).reduce(reducer))} */}
         </div>
       </Legend>
+      <Table>
+        <th>
+          <td>Category</td>
+          <td>Total disbursed value (nominal USD) for capacity</td>
+        </th>
+        {Object.entries(COLORS).map(([label, _color]) => {
+          return (
+            <tr>
+              <td>{LABELS[label] || label}</td>
+              <td>{formatPrecise(getCategorySum(label))}</td>
+            </tr>
+          );
+        })}
+        <tr>
+          <td>Total</td>
+          <td>
+            {formatPrecise(data.map((d: any) => d.value).reduce(reducer))}
+          </td>
+        </tr>
+      </Table>
     </>
   );
 };
+function getCategorySum(label: string): number {
+  const catVals = data.filter((d: any) => d.source_cat === label);
+  console.log(catVals);
+
+  return catVals.length > 0
+    ? catVals.map((d: any) => d.value).reduce(reducer)
+    : 0;
+}

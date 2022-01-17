@@ -1,46 +1,46 @@
 [
-  { "ce": "Detect", "cc": "Workforce Development", "value": 26036351636 },
-  { "ce": "Detect", "cc": "Reporting", "value": 25482511280 },
-  { "ce": "Detect", "cc": "Real Time Surveillance", "value": 20370709996 },
-  { "ce": "Detect", "cc": "National Laboratory System", "value": 17586312779 },
+  { "ce": "Detect", "cc": "Workforce Development", "value": 17420996065 },
+  { "ce": "Detect", "cc": "Real Time Surveillance", "value": 16271606457 },
+  { "ce": "Detect", "cc": "National Laboratory System", "value": 14191755008 },
+  { "ce": "Detect", "cc": "Reporting", "value": 13803941186 },
   {
     "ce": "General IHR",
     "cc": "General IHR Implementation",
-    "value": 4122818718
+    "value": 1794979542
   },
-  { "ce": "Other", "cc": "Point of Entry (PoE)", "value": 3637838568 },
-  { "ce": "Other", "cc": "Radiation Emergencies", "value": 47519930 },
-  { "ce": "Other", "cc": "Chemical Events", "value": 29156325 },
-  { "ce": "Prevent", "cc": "Immunization", "value": 44323938416 },
+  { "ce": "Other", "cc": "Point of Entry (PoE)", "value": 2410767422 },
+  { "ce": "Other", "cc": "Radiation Emergencies", "value": 34643620 },
+  { "ce": "Other", "cc": "Chemical Events", "value": 28259887 },
+  { "ce": "Prevent", "cc": "Immunization", "value": 29749232562 },
   {
     "ce": "Prevent",
     "cc": "National Legislation, Policy, and Financing",
-    "value": 21095220666
+    "value": 14771760382
   },
-  { "ce": "Prevent", "cc": "Zoonotic Disease", "value": 7452901349 },
+  { "ce": "Prevent", "cc": "Zoonotic Disease", "value": 5637793323 },
   {
     "ce": "Prevent",
     "cc": "Antimicrobial Resistance (AMR)",
-    "value": 4234599256
+    "value": 3358120501
   },
-  { "ce": "Prevent", "cc": "Food Safety", "value": 3043482825 },
-  { "ce": "Prevent", "cc": "Biosafety and Biosecurity", "value": 597620643 },
+  { "ce": "Prevent", "cc": "Food Safety", "value": 2530506461 },
+  { "ce": "Prevent", "cc": "Biosafety and Biosecurity", "value": 533967535 },
   {
     "ce": "Prevent",
     "cc": "IHR Coordination, Communicaton and Advocacy",
-    "value": 13161503
+    "value": 13066393
   },
-  { "ce": "Respond", "cc": "Preparedness", "value": 10418626485 },
   {
     "ce": "Respond",
     "cc": "Medical Countermeasures and Personnel Deployment",
-    "value": 7890931431
+    "value": 7234927854
   },
-  { "ce": "Respond", "cc": "Risk Communication", "value": 1624267683 },
+  { "ce": "Respond", "cc": "Preparedness", "value": 7131692237 },
+  { "ce": "Respond", "cc": "Risk Communication", "value": 1179648963 },
   {
     "ce": "Respond",
     "cc": "Linking Public Health and Security Authorities",
-    "value": 274315936
+    "value": 271011218
   },
-  { "ce": "Unspecified", "cc": "Unspecified", "value": 163514594078 }
+  { "ce": "Unspecified", "cc": "Unspecified", "value": 1.00296e11 }
 ]

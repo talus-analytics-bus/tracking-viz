@@ -1,5 +1,4 @@
-// const d3 = require("d3");
-// import d3 from "d3";
+import * as d3 from "d3/dist/d3.min";
 import dataTmp from "./jeespend.json";
 import uid from "../../lib/dom/uid";
 import { format } from "../../Utils";
@@ -8,6 +7,7 @@ const ces = [...new Set(dataTmp.map((d) => d.ce))];
 const hideChildren = ["Unspecified", "General IHR"];
 
 const SHOW_UNSPECIFIED = false;
+const WRAP = false;
 
 const data = {
   name: "Disbursed funding (USD, nominal) by Joint External Evaluation (JEE) core capacity",
@@ -28,23 +28,32 @@ const data = {
     .filter((d) => SHOW_UNSPECIFIED || d.name !== "Unspecified"),
 };
 
-console.log(data);
-
-const width = 1000;
-const height = 600;
+const width = 800;
+const height = 300;
 
 const test = d3.color("#2263B5");
 test.opacity = 0.5;
 
+// const colorSeries = ["#a6cee3", "#1f78b4", "#b2df8a", "#33a02c", "#fb9a99"];
+// const jeeColors = {
+//   Detect: ["#1f78b4", "#dbf2fa"],
+//   Prevent: ["#b2df8a", "#cde6f6"],
+//   Respond: ["#a6cee3", "#d8f4f0"],
+//   Other: ["#33a02c", "#e4f4d2"],
+//   General: ["#fb9a99", "#ffffff"],
+//   Main: "#ffffff",
+//   Unspecified: ["#AEAFB3", "#ffffff"],
+//   "General IHR": ["#fb9a99", "#f6cddf"],
+// };
 const jeeColors = {
-  Main: "#ffffff",
   Prevent: ["#2263B5", "#cde6f6"],
   Detect: ["#41BBE3", "#dbf2fa"],
   Respond: ["#2A8F82", "#d8f4f0"],
   Other: ["#71AE2C", "#e4f4d2"],
   General: ["#2263B5", "#ffffff"],
+  Main: "#ffffff",
   Unspecified: ["#AEAFB3", "#ffffff"],
-  "General IHR": ["#b52263", "#f6cddf"],
+  "General IHR": ["#8da0cb", "#f6cddf"],
 };
 
 const color = (d) => {
@@ -58,8 +67,9 @@ const treemap = (data) =>
   d3
     .treemap()
     .size([width, height])
+    .tile(d3.treemapBinary)
     .paddingOuter(3)
-    .paddingTop(19)
+    .paddingTop(30)
     .paddingInner(1)
     .round(true)(
     d3
@@ -72,6 +82,7 @@ const chart = () => {
   const root = treemap(data);
   const svg = d3
     .select("svg")
+    .html("")
     .attr("viewBox", [0, 0, width, height])
     .attr("width", width)
     .attr("height", height)
@@ -127,17 +138,19 @@ const chart = () => {
 
   node
     .append("text")
+    .attr("data-type", (d) => {
+      if (d.depth === 0) return "title";
+      if (d.depth === 1) return "ce";
+      if (d.depth === 2) return "cc";
+    })
     .attr("fill", (d) => (d.depth === 1 ? "white" : undefined))
-    .style("font-weight", (d) => (d.depth === 1 ? "bold" : undefined))
-    .style("font-size", (d) => (d.depth === 0 ? "1.5em" : undefined))
-    .style("font-size", (d) => (d.depth === 1 ? "1.5em" : undefined))
     .attr("clip-path", (d) => d.clipUid)
     .selectAll("tspan")
-    .data((d) => d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value)))
+    .data((d) => getTspanData(d))
     .join("tspan")
-    .attr("fill-opacity", (d, i, nodes) =>
-      i === nodes.length - 1 ? 0.7 : null
-    )
+    // .attr("fill-opacity", (d, i, nodes) => {
+    //   return i === nodes.length - 1 ? 0.7 : null;
+    // })
     .text((d) => d);
 
   const getDx = (_d, i) => {
@@ -147,7 +160,7 @@ const chart = () => {
     .filter((d) => d.children)
     .selectAll("tspan")
     .attr("dx", getDx)
-    .attr("y", 13);
+    .attr("y", 20);
 
   node
     .filter((d) => !d.children)
@@ -162,3 +175,8 @@ const chart = () => {
 };
 
 export default chart;
+function getTspanData(d) {
+  const words = d.data.name.split(/(?=[A-Z][^A-Z])/g).concat(format(d.value));
+  if (WRAP) return words;
+  return [d.data.name, format(d.value)];
+}
