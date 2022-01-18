@@ -13,6 +13,8 @@ import spar_recent_avg_tertiles from "./components/Map/spar_recent_avg_tertiles.
 import spar_recent_avg from "./components/Map/spar_recent_avg.json";
 import spar_and_2018_disb_tertiles from "./components/Map/spar_and_2018_disb_tertiles.json";
 import spar_and_2018_disb_tertiles_even from "./components/Map/spar_and_2018_disb_tertiles_even.json";
+import spar_even_and_2018_disb_even from "./components/Map/spar_even_and_2018_disb_even.json";
+import spar_even_and_2018_disb_tertiles from "./components/Map/spar_even_and_2018_disb_tertiles.json";
 
 const valToColorBivar: Record<number, string> = {
   31: "#DE8DC5",
@@ -36,7 +38,18 @@ function App() {
     <div className="App">
       <ColorMap
         title={
-          "2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
+          "A: 2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
+        }
+        subtitle={
+          "SPAR score averages and disbursed funds binned using equal-size breakpoints (one upper outlier removed from funding)"
+        }
+        data={spar_even_and_2018_disb_even}
+        chartKey={"bivariate-both-even"}
+        valToColor={valToColorBivar}
+      />
+      <ColorMap
+        title={
+          "B: 2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
         }
         subtitle={
           "Capacity gap binned by tertiles, disbursed funds binned using equal-size breakpoints (one upper outlier removed)"
@@ -47,7 +60,18 @@ function App() {
       />
       <ColorMap
         title={
-          "2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
+          "C: 2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
+        }
+        subtitle={
+          "Capacity gap binned by even-sized breakpoints and disbursed funds binned by tertiles"
+        }
+        data={spar_even_and_2018_disb_tertiles}
+        chartKey={"bivariate-spar-even-disb-tertiles"}
+        {...{ valToColor: valToColorBivar }}
+      />
+      <ColorMap
+        title={
+          "D: 2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
         }
         subtitle={"Capacity gap and disbursed funds binned by tertiles"}
         data={spar_and_2018_disb_tertiles}
