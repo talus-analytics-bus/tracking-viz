@@ -40,3 +40,18 @@ const formatSI = (val) => {
   // M
   else return d3.formatPrefix(",.2s", 1000000000)(val).replace(/G/, "B"); // B
 };
+
+export const getUniqueArrayEls = (input) => {
+  const output = [];
+  let prev = "__init__";
+  input.sort().forEach((v) => {
+    if (prev === "__init__" || prev === v) {
+      prev = v;
+      return;
+    } else {
+      prev = v;
+      output.push(v);
+    }
+  });
+  return output;
+};

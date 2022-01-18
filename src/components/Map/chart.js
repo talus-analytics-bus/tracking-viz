@@ -15,6 +15,7 @@ function Choropleth(
   data,
   {
     id = (d) => d.id, // given d in data, returns the feature id
+    chartKey = "", // used to select SVG
     value = () => undefined, // given d in data, returns the quantitative value
     title, // given a feature f and possibly a datum d, returns the hover text
     format, // optional format specifier for the title
@@ -80,7 +81,7 @@ function Choropleth(
   const path = d3.geoPath(projection);
 
   const svg = d3
-    .select("svg[data-chart=map]")
+    .select(`svg[data-chart=${chartKey}]`)
     .html("")
     .attr("width", width)
     .attr("height", height)
@@ -101,7 +102,8 @@ function Choropleth(
     .join("path")
     .attr("fill", (d, i) => {
       const val = V[Im.get(If[i])] || unknown;
-      if (typeof val === "string" && val[0] === "#") return val;
+      const d3Color = d3.color(val);
+      if (d3Color !== null) return d3Color;
       else return color(val);
     })
     .attr("d", path)
@@ -123,7 +125,7 @@ function Choropleth(
   return Object.assign(svg.node(), { scales: { color } });
 }
 
-const chart = (data, id, value, range, domain) => {
+const chart = (chartKey, data, id, value, range, domain) => {
   return Choropleth(data, {
     id, // country identifier in data
     value, // country value in data
@@ -138,6 +140,7 @@ const chart = (data, id, value, range, domain) => {
     // projection: d3.geoEqualEarth(),
     width: 1000,
     unknown: "#C3C3C4",
+    chartKey,
   });
 };
 

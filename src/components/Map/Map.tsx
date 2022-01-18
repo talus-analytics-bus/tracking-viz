@@ -14,15 +14,23 @@ interface MapProps {
   data: any[];
   id: (d: any) => any;
   value: (d: any) => any;
+  chartKey: string;
   domain?: any[];
   range?: any[];
 }
 
-export const Map: FC<MapProps> = ({ data, id, value, domain, range }) => {
+export const Map: FC<MapProps> = ({
+  data,
+  id,
+  value,
+  chartKey,
+  domain,
+  range,
+}) => {
   useEffect(() => {
-    chart(data, id, value, domain, range);
-  }, [data, domain, id, range, value]);
-  return <MapSvg data-chart="map"></MapSvg>;
+    chart(chartKey, data, id, value, domain, range);
+  }, [data, domain, id, chartKey, range, value]);
+  return <MapSvg data-chart={chartKey}></MapSvg>;
 };
 
 export default Map;
