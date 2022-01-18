@@ -36,7 +36,9 @@ const valToColorSpar: Record<number, string> = {
 function App() {
   return (
     <div className="App">
-      <ColorMap
+      <JEETreemap />
+      {/* Maps */}
+      {/* <ColorMap
         title={
           "A: 2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
         }
@@ -82,10 +84,9 @@ function App() {
         data={spar_recent_avg_tertiles}
         chartKey={"spar"}
         valToColor={valToColorSpar}
-      />
+      /> */}
       {/* <Table data={tableData} /> */}
       {/* <FundingSankey /> */}
-      {/* <JEETreemap /> */}
     </div>
   );
 }

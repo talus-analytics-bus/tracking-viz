@@ -6,8 +6,9 @@ const ces = [...new Set(dataTmp.map((d) => d.ce))];
 
 const hideChildren = ["Unspecified", "General IHR"];
 
-const SHOW_UNSPECIFIED = false;
+const SHOW_UNSPECIFIED = true;
 const WRAP = false;
+const LABELS = { Unspecified: "Could not be determined" };
 
 const data = {
   name: "Disbursed funding (USD, nominal) by Joint External Evaluation (JEE) core capacity",
@@ -151,7 +152,7 @@ const chart = () => {
     // .attr("fill-opacity", (d, i, nodes) => {
     //   return i === nodes.length - 1 ? 0.7 : null;
     // })
-    .text((d) => d);
+    .text((d) => LABELS[d] || d);
 
   const getDx = (_d, i) => {
     return i === 0 || _d.startsWith("$") ? 3 : null;
