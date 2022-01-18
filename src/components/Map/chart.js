@@ -100,12 +100,10 @@ function Choropleth(
     .data(features.features)
     .join("path")
     .attr("fill", (d, i) => {
-      //   console.log(d);
-      return V[Im.get(If[i])] || unknown;
-      //   return color(V[Im.get(If[i])]);
-      //   return "red";
+      const val = V[Im.get(If[i])] || unknown;
+      if (typeof val === "string" && val[0] === "#") return val;
+      else return color(val);
     })
-    // .attr("fill", (d, i) => color(V[Im.get(If[i])]))
     .attr("d", path)
     .append("title")
     .text((d, i) => title(d, Im.get(If[i])));
