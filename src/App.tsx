@@ -12,6 +12,7 @@ import unmetneeds from "./components/Map/unmetneeds.json";
 import spar_recent_avg_tertiles from "./components/Map/spar_recent_avg_tertiles.json";
 import spar_recent_avg from "./components/Map/spar_recent_avg.json";
 import spar_and_2018_disb_tertiles from "./components/Map/spar_and_2018_disb_tertiles.json";
+import spar_and_2018_disb_tertiles_even from "./components/Map/spar_and_2018_disb_tertiles_even.json";
 
 const valToColorBivar: Record<number, string> = {
   31: "#DE8DC5",
@@ -34,14 +35,29 @@ function App() {
   return (
     <div className="App">
       <ColorMap
-        data={spar_recent_avg_tertiles}
-        chartKey={"spar"}
-        valToColor={valToColorSpar}
+        title={
+          "2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
+        }
+        subtitle={
+          "Capacity gap binned by tertiles, disbursed funds binned using equal-size breakpoints (one upper outlier removed)"
+        }
+        data={spar_and_2018_disb_tertiles_even}
+        chartKey={"bivariate-even"}
+        valToColor={valToColorBivar}
       />
       <ColorMap
+        title={
+          "2017 SPAR score averages and disbursed capacity funding post-2017 (USD, nominal)"
+        }
+        subtitle={"Capacity gap and disbursed funds binned by tertiles"}
         data={spar_and_2018_disb_tertiles}
         chartKey={"bivariate"}
         {...{ valToColor: valToColorBivar }}
+      />
+      <ColorMap
+        data={spar_recent_avg_tertiles}
+        chartKey={"spar"}
+        valToColor={valToColorSpar}
       />
       {/* <Table data={tableData} /> */}
       {/* <FundingSankey /> */}

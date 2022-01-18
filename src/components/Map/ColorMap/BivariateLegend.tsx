@@ -1,12 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 
-const StyledBivariateLegend = styled.div`
+const StyledBivariateLegend = styled.div<{ bivariate?: boolean }>`
   /* margin: 0 auto; */
   display: flex;
   margin-top: -70px; // TODO elegantly
   margin-bottom: 40px;
   font-family: "Open Sans", sans-serif;
+  position: absolute;
+  bottom: 0;
+  left: ${(props: any) => (props.bivariate ? "1em" : undefined)};
 `;
 const BivariateEntries = styled.div`
   display: grid;
@@ -50,7 +53,7 @@ export const BivariateLegend = ({
   const bivariate = keys.length > 3;
   const sequence2 = bivariate ? [1, 2, 3] : [1];
   return (
-    <StyledBivariateLegend>
+    <StyledBivariateLegend bivariate>
       <BivariateEntriesAndXLabel>
         {bivariate && <SideLabelY axis={"y"}>Capacity gap →</SideLabelY>}
         <BivariateEntries>

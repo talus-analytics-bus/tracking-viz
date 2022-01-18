@@ -15,10 +15,14 @@ export const ColorMap = ({
   data,
   chartKey,
   valToColor,
+  title = "",
+  subtitle = "",
 }: {
   data: any[];
   chartKey: string;
   valToColor?: Record<number, string>;
+  title?: string;
+  subtitle?: string;
 }) => {
   const colors: string[] =
     valToColor !== undefined
@@ -38,9 +42,10 @@ export const ColorMap = ({
         }
         domain={colors}
         range={colors}
-        {...{ data, chartKey }}
-      ></Map>
-      <BivariateLegend {...{ valToColor }} />
+        {...{ data, chartKey, title, subtitle }}
+      >
+        <BivariateLegend {...{ valToColor }} />
+      </Map>
     </MapWrapper>
   );
 };
