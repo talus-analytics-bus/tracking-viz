@@ -3,19 +3,12 @@ import { JEETreemap } from "./components/JEETreemap/JEETreemap";
 import { FundingSankey } from "./components/FundingSankey/FundingSankey";
 import Table from "./components/Table/Table";
 import tableData from "./components/Table/topfunders.json";
-import Map from "./components/Map/Map";
-
-const FLAG_BASE_URL: string = "https://flags.talusanalytics.com/shiny_64px/";
-
-const getFlagUrl = (cat: string, iso2: string) => {
-  if (cat === "Country") return `${FLAG_BASE_URL}${iso2.toLowerCase()}.png`;
-  else return `${FLAG_BASE_URL}org.png`;
-};
+import ColorMap from "./components/Map/ColorMap/ColorMap";
 
 function App() {
   return (
     <div className="App">
-      <Map />
+      <ColorMap />
       {/* <Table data={tableData} /> */}
       {/* <FundingSankey /> */}
       {/* <JEETreemap /> */}

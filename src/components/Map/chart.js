@@ -125,24 +125,20 @@ function Choropleth(
   return Object.assign(svg.node(), { scales: { color } });
 }
 
-const chart = (data) => {
-  const colors = [...new Set(data.map((d) => d.Color))];
-
+const chart = (data, id, value, range, domain) => {
   return Choropleth(data, {
-    id: (d) => d["Stakeholder ISO3"], // country name, e.g. Zimbabwe
-    value: (d) => d.Color, // TEMP
-    range: colors,
+    id, // country identifier in data
+    value, // country value in data
+    range,
     // range: (d) => d,
-    domain: colors,
+    domain,
     // range: d3.interpolateYlGnBu,
     features: countries,
     featureId: (d) => d.properties.iso3, // i.e., not ISO 3166-1 numeric
     borders: countrymesh,
-    // projection: d3.geoNaturalEarth,
     projection: geoNaturalEarth2(),
     // projection: d3.geoEqualEarth(),
     width: 1000,
-    // outline: null,
     unknown: "#C3C3C4",
   });
 };
