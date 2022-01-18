@@ -36,7 +36,9 @@ const valToColorSpar: Record<number, string> = {
 function App() {
   return (
     <div className="App">
-      <JEETreemap />
+      {/* Treemap */}
+      {/* <JEETreemap /> */}
+
       {/* Maps */}
       {/* <ColorMap
         title={
@@ -86,7 +88,8 @@ function App() {
         valToColor={valToColorSpar}
       /> */}
       {/* <Table data={tableData} /> */}
-      {/* <FundingSankey /> */}
+      {/* Sankey */}
+      <FundingSankey />
     </div>
   );
 }

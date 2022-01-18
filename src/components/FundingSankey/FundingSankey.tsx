@@ -3,7 +3,10 @@ import styled from "styled-components";
 import { format } from "../../Utils";
 import chart from "./chart";
 // const data = require("./all_indivs_to_country_indivs_tracking_sankey_01172022.json");
-const data = require("./all_cat_indiv_to_who_region_tracking_sankey_01172022.json");
+// const data = require("./all_cat_indiv_to_who_region_tracking_sankey_01172022.json");
+// const data = require("./all_country_individuals_to_countries_tracking_sankey_01182022.json");
+const data = require("./all_indivs_to_int_indivs_tracking_sankey_01172022.json");
+// const data = require("./all_phil_individuals_to_countries_01182022.json");
 
 const reducer = (previousValue: number, currentValue: number) =>
   previousValue + currentValue;
@@ -69,6 +72,7 @@ export const FundingSankey = () => {
       <SankeySvg data-chart={"sankey"} />
       <Legend>
         {Object.entries(COLORS).map(([label, color]) => {
+          if (getCategorySum(label) === 0) return null;
           return (
             <Entry>
               <Square color={color} />
