@@ -1,0 +1,142 @@
+[
+  {
+    "id": 1181,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/rgn.png",
+    "label": "Low and middle-income countries (LMIC)",
+    "d": 23599722475,
+    "c": 24531118231
+  },
+  {
+    "id": 1013,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ng.png",
+    "label": "Nigeria",
+    "d": 9372854929,
+    "c": 11466063685
+  },
+  {
+    "id": 939,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/et.png",
+    "label": "Ethiopia",
+    "d": 6560620723,
+    "c": 7414412989
+  },
+  {
+    "id": 1076,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/tz.png",
+    "label": "United Republic of Tanzania",
+    "d": 6355252090,
+    "c": 7417588367
+  },
+  {
+    "id": 926,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/cd.png",
+    "label": "Democratic Republic of the Congo",
+    "d": 5926749007,
+    "c": 6781248595
+  },
+  {
+    "id": 977,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ke.png",
+    "label": "Kenya",
+    "d": 5824321418,
+    "c": 6336867142
+  },
+  {
+    "id": 965,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/in.png",
+    "label": "India",
+    "d": 5782253158,
+    "c": 7645789482
+  },
+  {
+    "id": 1072,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ug.png",
+    "label": "Uganda",
+    "d": 5488168807,
+    "c": 6264892731
+  },
+  {
+    "id": 1053,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/za.png",
+    "label": "South Africa",
+    "d": 5037623476,
+    "c": 5621559945
+  },
+  {
+    "id": 1005,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/mz.png",
+    "label": "Mozambique",
+    "d": 4984943656,
+    "c": 5779205472
+  },
+  {
+    "id": 1019,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/pk.png",
+    "label": "Pakistan",
+    "d": 4381975451,
+    "c": 5650471078
+  },
+  {
+    "id": 888,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/bd.png",
+    "label": "Bangladesh",
+    "d": 3976234496,
+    "c": 4206939700
+  },
+  {
+    "id": 1087,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/zm.png",
+    "label": "Zambia",
+    "d": 3949500731,
+    "c": 4668443278
+  },
+  {
+    "id": 992,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/mw.png",
+    "label": "Malawi",
+    "d": 3634478765,
+    "c": 4489089768
+  },
+  {
+    "id": 1088,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/zw.png",
+    "label": "Zimbabwe",
+    "d": 3383772504,
+    "c": 3951013317
+  },
+  {
+    "id": 1098,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/other.png",
+    "label": "Africa",
+    "d": 3133576438,
+    "c": 3795651122
+  },
+  {
+    "id": 1054,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ss.png",
+    "label": "South Sudan",
+    "d": 2647957892,
+    "c": 2427497082
+  },
+  {
+    "id": 1401,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/other.png",
+    "label": "Sub-Saharan Africa",
+    "d": 2475080181,
+    "c": 2845197121
+  },
+  {
+    "id": 1086,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/ye.png",
+    "label": "Yemen",
+    "d": 2225108170,
+    "c": 2031112079
+  },
+  {
+    "id": 1046,
+    "flag_url": "https://flags.talusanalytics.com/shiny_64px/sl.png",
+    "label": "Sierra Leone",
+    "d": 2039827745,
+    "c": 1287173601
+  }
+]

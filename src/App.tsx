@@ -2,7 +2,8 @@ import "./App.css";
 import { JEETreemap } from "./components/JEETreemap/JEETreemap";
 import { FundingSankey } from "./components/FundingSankey/FundingSankey";
 import Table from "./components/Table/Table";
-import tableData from "./components/Table/topfunders.json";
+import topFunders from "./components/Table/topfunders.json";
+import topRecipients from "./components/Table/toprecipients.json";
 import ChoroplethMap from "./components/Map/ChoroplethMap/ChoroplethMap";
 import ColorMap from "./components/Map/ColorMap/ColorMap";
 
@@ -87,9 +88,13 @@ function App() {
         chartKey={"spar"}
         valToColor={valToColorSpar}
       /> */}
-      {/* <Table data={tableData} /> */}
+
+      {/* Table */}
+      {/* <Table data={topFunders} role={"funder"} /> */}
+      <Table data={topRecipients} role={"recipient"} />
+
       {/* Sankey */}
-      <FundingSankey />
+      {/* <FundingSankey /> */}
     </div>
   );
 }
