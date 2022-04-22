@@ -6,6 +6,7 @@ import * as d3Sankey from "d3-sankey";
 
 const MARGIN = 400;
 const TO_ALL_CAPS = ["euro", "afro", "wpro", "searo", "amro", "emro"];
+const SHOW_LABELS = true;
 
 // Copyright 2021 Observable, Inc.
 // Released under the ISC license.
@@ -116,8 +117,8 @@ function SankeyChart(
     nodeLabel === undefined
       ? N
       : nodeLabel == null
-      ? null
-      : d3.map(nodes, nodeLabel);
+        ? null
+        : d3.map(nodes, nodeLabel);
   const Tt = nodeTitle == null ? null : d3.map(nodes, nodeTitle);
   const Lt = linkTitle == null ? null : d3.map(links, linkTitle);
 
@@ -186,16 +187,16 @@ function SankeyChart(
       linkColor === "source-target"
         ? ({ index: i }) => `url(#${uid}-link-${i})`
         : linkColor === "source"
-        ? ({ source: { index: i } }) => color(G[i])
-        : linkColor === "target"
-        ? ({ target: { index: i } }) => color(G[i])
-        : linkColor
+          ? ({ source: { index: i } }) => color(G[i])
+          : linkColor === "target"
+            ? ({ target: { index: i } }) => color(G[i])
+            : linkColor
     )
     .attr("stroke-width", ({ width }) => Math.max(1, width))
     .call(
       Lt
         ? (path) => path.append("title").text(({ index: i }) => Lt[i])
-        : () => {}
+        : () => { }
     );
 
   if (Tl && showLabels)
@@ -258,7 +259,7 @@ const chart = (chartData, colors) =>
       // links: chartData.slice(0, 1000),
     },
     {
-      showLabels: false,
+      showLabels: SHOW_LABELS,
       nodeGroup: (d) => d.cat, // take first word for color: ;
       nodeAlign: "justify", // e.g., d3.sankeyJustify; set by input above
       linkColor: "source", // e.g., "source" or "target"; set by input above
