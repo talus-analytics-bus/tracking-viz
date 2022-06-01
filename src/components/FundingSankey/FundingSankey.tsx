@@ -6,7 +6,8 @@ import chart from "./chart";
 // const data = require("./all_cat_indiv_to_who_region_tracking_sankey_01172022.json");
 // const data = require("./all_country_individuals_to_countries_tracking_sankey_01182022.json");
 // const data = require("./all_indivs_to_int_indivs_tracking_sankey_01172022.json");
-const data = require("./all_phil_individuals_to_countries_01182022.json");
+// const data = require("./all_phil_individuals_to_countries_01182022.json");
+const data = require("./sankey_data.json");
 
 const reducer = (previousValue: number, currentValue: number) =>
   previousValue + currentValue;
